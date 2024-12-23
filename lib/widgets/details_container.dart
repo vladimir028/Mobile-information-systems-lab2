@@ -3,11 +3,15 @@ import 'package:jokes/models/joke.dart';
 
 import 'details_joke.dart';
 
-class DetailData extends StatelessWidget {
+class DetailData extends StatefulWidget {
   final Joke joke;
-
   const DetailData({super.key, required this.joke});
 
+  @override
+  State<DetailData> createState() => _DetailDataState();
+}
+
+class _DetailDataState extends State<DetailData> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +31,7 @@ class DetailData extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailContainerText(joke: joke),
+            DetailContainerText(joke: widget.joke),
           ],
         ));
   }

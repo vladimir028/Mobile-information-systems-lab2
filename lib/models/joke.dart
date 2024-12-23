@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Joke {
   String type;
   String setup;
@@ -8,6 +10,12 @@ class Joke {
 
 
   Joke.fromJson(Map<String, dynamic> data)
+      : type = data['type'],
+        setup = data['setup'],
+        punchline = data['punchline'],
+        id = data['id'];
+
+  Joke.fromJsonDocumentMap(DocumentSnapshot<Map<String, dynamic>> data)
       : type = data['type'],
         setup = data['setup'],
         punchline = data['punchline'],

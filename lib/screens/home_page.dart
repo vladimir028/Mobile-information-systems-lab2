@@ -40,6 +40,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent[100],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/favorite_jokes');
+              },
+              icon: const Icon(Icons.favorite, color: Colors.white, size: 28))
+        ],
         leading: IconButton(
             onPressed: () {
               Navigator.pushNamed(context, '/random_joke');
