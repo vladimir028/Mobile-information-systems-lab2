@@ -1,21 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:jokes/firebase_options.dart';
 import 'package:jokes/screens/details_page.dart';
 import 'package:jokes/screens/favorite_jokes.dart';
 import 'package:jokes/screens/home_page.dart';
 import 'package:jokes/screens/random_joke.dart';
+import 'package:jokes/services/notification_services.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-
-  await FirebaseMessaging.instance.subscribeToTopic("lab-exercises");
-  final fcmToken = await FirebaseMessaging.instance.getToken();
-  print("FCM Token: $fcmToken");
+  await FirebaseApi().initNotification();
   runApp(const MyApp());
 }
 
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
